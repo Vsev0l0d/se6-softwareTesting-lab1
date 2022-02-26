@@ -23,10 +23,10 @@ public class Location {
         return healthPoint;
     }
 
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
-        if (initialHealthPoint > healthPoint) System.out.println("Разваливается");
-        if (healthPoint / initialHealthPoint < 0.7) {
+    public void changeHealthPoint(int healthPointDifference) {
+        this.healthPoint += healthPointDifference;
+        if (healthPointDifference < 0) System.out.println("Разваливается");
+        if (healthPointDifference / initialHealthPoint < 0.7) {
             System.out.println("Плавится лицевая сторона");
         }
     }

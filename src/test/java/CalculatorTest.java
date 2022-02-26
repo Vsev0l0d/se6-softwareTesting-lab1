@@ -15,31 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CalculatorTest {
     private static final double ACCURATE = 0.001;
 
-    @Test
-    @DisplayName("NaN")
-    void nan() {
-        assertEquals(NaN, Calculator.arccos(NaN));
-    }
-
-    @Test
-    @DisplayName("Positive infinity")
-    void positiveInfinity() {
-        assertEquals(NaN, Calculator.arccos(POSITIVE_INFINITY));
-    }
-
-    @Test
-    @DisplayName("Negative infinity")
-    void negativeInfinity() {
-        assertEquals(NaN, Calculator.arccos(NEGATIVE_INFINITY));
-    }
-
-    @ParameterizedTest(name = "{index}: arccos({0}) = NaN")
-    @DisplayName("Values not in [-1, 1]")
-    @ValueSource(doubles = {-10000, -100, -1.000001, 1.000001, 100, 10000})
-    void convergingValues(double x) {
-        assertEquals(NaN, Calculator.arccos(x));
-    }
-
     @ParameterizedTest(name = "{index}: arccos({0}) = {1}")
     @DisplayName("Values in [-1, 1]")
     @CsvSource({
@@ -75,5 +50,30 @@ class CalculatorTest {
     @MethodSource
     void testArccos(double in, double expected) {
         assertEquals(expected, Calculator.arccos(in), ACCURATE);
+    }
+
+    @ParameterizedTest(name = "{index}: arccos({0}) = NaN")
+    @DisplayName("Values not in [-1, 1]")
+    @ValueSource(doubles = {-10000, -100, -1.000001, 1.000001, 100, 10000})
+    void convergingValues(double x) {
+        assertEquals(NaN, Calculator.arccos(x));
+    }
+
+    @Test
+    @DisplayName("NaN")
+    void nan() {
+        assertEquals(NaN, Calculator.arccos(NaN));
+    }
+
+    @Test
+    @DisplayName("Positive infinity")
+    void positiveInfinity() {
+        assertEquals(NaN, Calculator.arccos(POSITIVE_INFINITY));
+    }
+
+    @Test
+    @DisplayName("Negative infinity")
+    void negativeInfinity() {
+        assertEquals(NaN, Calculator.arccos(NEGATIVE_INFINITY));
     }
 }

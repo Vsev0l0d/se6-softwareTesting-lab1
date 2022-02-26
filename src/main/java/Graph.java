@@ -7,9 +7,8 @@ public class Graph {
     public Graph(int v) {
         edgeCount = v;
         graph = new LinkedList[edgeCount];
-        for (int i = 0; i < graph.length; i++) {
+        for (int i = 0; i < graph.length; i++)
             graph[i] = new LinkedList<>();
-        }
     }
 
     void addEdge(int a, int b) {
@@ -37,10 +36,7 @@ public class Graph {
 
             for (int i = 0; i < graph[node].size(); i++) {
                 current = graph[node].get(i);
-
-                if (!visited[current]) {
-                    queue.add(current);
-                }
+                if (!visited[current]) queue.add(current);
             }
         }
         return result.toArray(new Integer[0]);

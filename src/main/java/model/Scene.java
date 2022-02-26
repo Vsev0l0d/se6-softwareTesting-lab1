@@ -38,10 +38,9 @@ public class Scene {
     public void start() {
         event.startEvent(110, 110);
         if (event.isActive()) {
-            location.setHealthPoint(event.getDamage());
-            for (Personage personage : members) {
+            location.changeHealthPoint(-event.getDamage());
+            for (Personage personage : members)
                 personage.waiting();
-            }
         }
     }
 }
