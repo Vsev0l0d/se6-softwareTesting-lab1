@@ -16,6 +16,6 @@ public class Personage {
     }
 
     public void waiting() {
-        System.out.println("Жду...");
+        System.out.println(name + " жду...");
     }
 }
