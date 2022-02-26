@@ -21,11 +21,11 @@ public class Graph {
 
     Integer[] DFS(int node) {
         ArrayList<Integer> result = new ArrayList<>();
-        boolean[] nodes = new boolean[edgeCount];
+        boolean[] visited = new boolean[edgeCount];
         Stack<Integer> stack = new Stack<>();
 
         stack.push(node);
-        nodes[node] = true;
+        visited[node] = true;
         result.add(node);
 
         int current;
@@ -33,14 +33,12 @@ public class Graph {
             node = stack.peek();
             stack.pop();
 
-            if (!nodes[node]) {
-                nodes[node] = true;
-            }
+            if (!visited[node]) visited[node] = true;
 
             for (int i = 0; i < graph[node].size(); i++) {
                 current = graph[node].get(i);
 
-                if (!nodes[current]) {
+                if (!visited[current]) {
                     stack.push(current);
                     result.add(current);
                 }
