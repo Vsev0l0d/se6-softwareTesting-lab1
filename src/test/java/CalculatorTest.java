@@ -13,6 +13,8 @@ import static java.lang.Math.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
+    private static final double ACCURATE = 0.001;
+
     @Test
     @DisplayName("NaN")
     void nan() {
@@ -49,7 +51,7 @@ class CalculatorTest {
             "0.9,0.45102681179626236",
     })
     void convergingValues(double x, double expected) {
-        assertEquals(expected, Calculator.arccos(x), Calculator.getAccurate());
+        assertEquals(expected, Calculator.arccos(x), ACCURATE);
     }
 
     private static Stream<Arguments> testArccos() {
@@ -72,6 +74,6 @@ class CalculatorTest {
     @DisplayName("Table values")
     @MethodSource
     void testArccos(double in, double expected) {
-        assertEquals(expected, Calculator.arccos(in), Calculator.getAccurate());
+        assertEquals(expected, Calculator.arccos(in), ACCURATE);
     }
 }
