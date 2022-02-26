@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Graph {
     private List<Integer>[] graph;
@@ -19,28 +16,30 @@ public class Graph {
         graph[a].add(b);
     }
 
-    Integer[] DFS(int node) {
+    Integer[] DFS(Integer node) {
+        if (graph.length == 0 || node > graph.length) return null;
+
         ArrayList<Integer> result = new ArrayList<>();
         boolean[] visited = new boolean[edgeCount];
-        Stack<Integer> stack = new Stack<>();
+        Queue<Integer> queue = new PriorityQueue<>();
 
-        stack.push(node);
-        visited[node] = true;
-        result.add(node);
+        queue.add(node);
 
         int current;
-        while (!stack.empty()) {
-            node = stack.peek();
-            stack.pop();
+        while (queue.size() > 0) {
+            node = queue.peek();
+            queue.poll();
 
-            if (!visited[node]) visited[node] = true;
+            if (!visited[node]) {
+                result.add(node);
+                visited[node] = true;
+            }
 
             for (int i = 0; i < graph[node].size(); i++) {
                 current = graph[node].get(i);
 
                 if (!visited[current]) {
-                    stack.push(current);
-                    result.add(current);
+                    queue.add(current);
                 }
             }
         }
