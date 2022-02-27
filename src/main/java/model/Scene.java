@@ -35,12 +35,14 @@ public class Scene {
         this.members = members;
     }
 
-    public void start() {
+    public String start() {
+        StringBuilder stringBuilder = new StringBuilder();
         event.startEvent(110, 110);
         if (event.isActive()) {
-            location.changeHealthPoint(-event.getDamage());
+            stringBuilder.append(location.changeHealthPoint(-event.getDamage()));
             for (Personage personage : members)
-                personage.waiting();
+                stringBuilder.append(personage.waiting());
         }
+        return stringBuilder.toString();
     }
 }

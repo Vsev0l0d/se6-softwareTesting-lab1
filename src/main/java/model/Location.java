@@ -33,12 +33,14 @@ public class Location {
         return healthPoint;
     }
 
-    public void changeHealthPoint(int healthPointDifference) {
+    public String changeHealthPoint(int healthPointDifference) {
         this.healthPoint += healthPointDifference;
-        if (healthPointDifference < 0) System.out.println(name + " разваливается");
+        StringBuilder stringBuilder = new StringBuilder();
+        if (healthPointDifference < 0) stringBuilder.append(name + " разваливается").append("/n");
         if (healthPointDifference / initialHealthPoint < 0.7) {
-            System.out.println("Плавится лицевая сторона");
+            stringBuilder.append("Плавится лицевая сторона").append("/n");
         }
+        return stringBuilder.toString();
     }
 
 

@@ -15,7 +15,7 @@ public class Personage {
         this.name = name;
     }
 
-    public void waiting() {
-        System.out.println(name + " жду...");
+    public String waiting() {
+        return name + " жду... ";
     }
 }

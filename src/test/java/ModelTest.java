@@ -5,6 +5,9 @@ import model.Scene;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class ModelTest {
     private static Location computerBank;
     private static Event bombing;
@@ -23,7 +26,44 @@ public class ModelTest {
     }
 
     @Test
-    void test() {
-        scene.start();
+    void testLocationName() {
+        assertEquals("Компьютерный банк", computerBank.getName());
+    }
+
+    @Test
+    void testEventName() {
+        assertEquals("Бомбардировка", bombing.getName());
+    }
+
+    @Test
+    void testEventActive() {
+        assertTrue(bombing.isActive());
+    }
+
+    @Test
+    void testEventOptions() {
+        assertEquals(110, bombing.getHeat());
+        assertEquals(110, bombing.getVolume());
+    }
+
+    @Test
+    void testLocationState() {
+        assertEquals(100, computerBank.getHealthPoint());
+    }
+
+    @Test
+    void testPersonageName() {
+        assertEquals("Он", personage1.getName());
+        assertEquals("Она", personage2.getName());
+    }
+
+    @Test
+    void testLocationChangeHP() {
+        assertEquals(computerBank.getName() + " разваливается/nПлавится лицевая сторона/n", computerBank.changeHealthPoint(-bombing.getDamage()));
+    }
+
+    @Test
+    void testScene() {
+        assertEquals(computerBank.getName() + " разваливается/nПлавится лицевая сторона/n" + personage1.waiting() + personage2.waiting(), scene.start());
     }
 }
