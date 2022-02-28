@@ -6,9 +6,9 @@ public class Graph {
 
     public Graph(int v) {
         edgeCount = v;
-        graph = new LinkedList[edgeCount];
+        graph = new ArrayList[edgeCount];
         for (int i = 0; i < graph.length; i++)
-            graph[i] = new LinkedList<>();
+            graph[i] = new ArrayList<>();
     }
 
     void addEdge(int a, int b) {
