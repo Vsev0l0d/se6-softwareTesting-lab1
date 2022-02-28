@@ -28,16 +28,19 @@ public class ModelTest {
     @Test
     void testLocationName() {
         assertEquals("Компьютерный банк", computerBank.getName());
+        assertEquals("Компьютерный банк", scene.getLocation().getName());
     }
 
     @Test
     void testEventName() {
         assertEquals("Бомбардировка", bombing.getName());
+        assertEquals("Бомбардировка", scene.getEvent().getName());
     }
 
     @Test
     void testEventActive() {
         assertTrue(bombing.isActive());
+        assertTrue(scene.getEvent().isActive());
     }
 
     @Test
