@@ -1,7 +1,7 @@
 package model;
 
 public class Location {
-    private final double initialHealthPoint;
+    private final int initialHealthPoint;
     private String name;
     private String planet;
     private int healthPoint;
@@ -34,18 +34,20 @@ public class Location {
     }
 
     public double getHPPercent() {
-        return healthPoint / initialHealthPoint;
+        return (double) healthPoint / initialHealthPoint;
+    }
+
+    public boolean isFrontMelt() {
+        return getHPPercent() < 0.7;
     }
 
     public String changeHealthPoint(int healthPointDifference) {
         this.healthPoint += healthPointDifference;
         StringBuilder stringBuilder = new StringBuilder();
         if (healthPointDifference < 0) stringBuilder.append(name + " разваливается").append("\n");
-        if (getHPPercent() < 0.7) {
+        if (isFrontMelt()) {
             stringBuilder.append("Плавится лицевая сторона").append("\n");
         }
         return stringBuilder.toString();
     }
-
-
 }

@@ -54,10 +54,4 @@ public class Event {
     public void setDamage(int damage) {
         this.damage = damage;
     }
-
-    public void startEvent(int volume, int heat) {
-        active = true;
-        this.heat = heat;
-        this.volume = volume;
-    }
 }

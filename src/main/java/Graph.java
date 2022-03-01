@@ -17,7 +17,7 @@ public class Graph {
 
     Integer[] DFS(Integer node) {
         if (graph.length == 0 || node > graph.length) return null;
-        graph = null;
+
         ArrayList<Integer> result = new ArrayList<>();
         boolean[] visited = new boolean[edgeCount];
         Queue<Integer> queue = new PriorityQueue<>();
