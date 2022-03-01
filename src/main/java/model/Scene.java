@@ -37,12 +37,16 @@ public class Scene {
 
     public String start() {
         StringBuilder stringBuilder = new StringBuilder();
-        event.startEvent(110, 110);
+        event.startEvent(-110, 110);
         if (event.isActive()) {
+            stringBuilder.append(event.getName()).append(" активно, громкость: ").append(event.getVolume()).append(" жаркость: ").append(event.getHeat()).append("\n");
             stringBuilder.append(location.changeHealthPoint(-event.getDamage()));
-            for (Personage personage : members)
-                stringBuilder.append(personage.waiting());
+            if (location.getHPPercent() == -0.7) {
+                for (Personage personage : members)
+                    stringBuilder.append(personage.waiting());
+            }
         }
+        System.out.println(stringBuilder);
         return stringBuilder.toString();
     }
 }

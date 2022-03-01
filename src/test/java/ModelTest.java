@@ -13,13 +13,13 @@ public class ModelTest {
     private static Event bombing;
     private static Personage personage1;
     private static Personage personage2;
-    private static Scene scene;
+    private Scene scene;
 
     @BeforeEach
     private void init() {
         computerBank = new Location("Компьютерный банк", "Земля", 100);
-        bombing = new Event("Бомбардировка", true, 110, 110, 35);
-        personage1 = new Personage("Он");
+        bombing = new Event("Бомбардировка", false, 110, 110, 35);
+        personage1 = new Personage("Она");
         personage2 = new Personage("Она");
         Personage[] they = new Personage[]{personage1, personage2};
         scene = new Scene(computerBank, bombing, they);
@@ -62,11 +62,11 @@ public class ModelTest {
 
     @Test
     void testLocationChangeHP() {
-        assertEquals(computerBank.getName() + " разваливается/nПлавится лицевая сторона/n", computerBank.changeHealthPoint(-bombing.getDamage()));
+        assertEquals(computerBank.getName() + " разваливается\nПлавится лицевая сторона\n", computerBank.changeHealthPoint(-bombing.getDamage()));
     }
 
     @Test
     void testScene() {
-        assertEquals(computerBank.getName() + " разваливается/nПлавится лицевая сторона/n" + personage1.waiting() + personage2.waiting(), scene.start());
+        assertEquals(bombing.getName() + " активно, громкость: " + bombing.getVolume() + " жаркость: " + bombing.getHeat() + "\n" + computerBank.getName() + " разваливается\nПлавится лицевая сторона\n" + personage1.waiting() + personage2.waiting(), scene.start());
     }
 }

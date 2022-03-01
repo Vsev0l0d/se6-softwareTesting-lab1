@@ -33,12 +33,16 @@ public class Location {
         return healthPoint;
     }
 
+    public double getHPPercent() {
+        return healthPoint / initialHealthPoint;
+    }
+
     public String changeHealthPoint(int healthPointDifference) {
         this.healthPoint += healthPointDifference;
         StringBuilder stringBuilder = new StringBuilder();
-        if (healthPointDifference < 0) stringBuilder.append(name + " разваливается").append("/n");
-        if (healthPointDifference / initialHealthPoint < 0.7) {
-            stringBuilder.append("Плавится лицевая сторона").append("/n");
+        if (healthPointDifference < 0) stringBuilder.append(name + " разваливается").append("\n");
+        if (getHPPercent() < 0.7) {
+            stringBuilder.append("Плавится лицевая сторона").append("\n");
         }
         return stringBuilder.toString();
     }
