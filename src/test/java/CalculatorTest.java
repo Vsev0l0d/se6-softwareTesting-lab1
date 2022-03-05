@@ -13,7 +13,7 @@ import static java.lang.Math.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
-    private static final double ACCURATE = 0.001;
+    private final double ACCURATE = 0.001;
 
     @ParameterizedTest(name = "{index}: arccos({0}) = {1}")
     @DisplayName("Values in [-1, 1]")

@@ -7,68 +7,61 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GraphTest {
-    private static Graph graph1;
-    private static Graph graph2;
+    private Graph graph;
 
     @BeforeEach
     private void createGraph() {
-        graph1 = new Graph(8);
-        graph1.addEdge(0, 1);
-        graph1.addEdge(1, 0);
-        graph1.addEdge(1, 5);
-        graph1.addEdge(3, 5);
-        graph1.addEdge(3, 7);
-        graph1.addEdge(5, 7);
-        graph1.addEdge(5, 6);
-        graph1.addEdge(7, 6);
-        graph1.addEdge(6, 4);
-
-        graph2 = new Graph(8);
-        graph2.addEdge(0, 3);
-        graph2.addEdge(1, 0);
-        graph2.addEdge(1, 2);
-        graph2.addEdge(1, 3);
-        graph2.addEdge(2, 5);
-        graph2.addEdge(2, 6);
-        graph2.addEdge(3, 1);
-        graph2.addEdge(3, 5);
-        graph2.addEdge(4, 7);
-        graph2.addEdge(5, 6);
-        graph2.addEdge(6, 7);
+        graph = new Graph(8);
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 0);
+        graph.addEdge(1, 5);
+        graph.addEdge(3, 5);
+        graph.addEdge(3, 7);
+        graph.addEdge(5, 7);
+        graph.addEdge(5, 6);
+        graph.addEdge(7, 6);
+        graph.addEdge(6, 4);
     }
 
-    private static Stream<Arguments> testGraph1() {
+    private static Stream<Arguments> simpleCases() {
         return Stream.of(
-                Arguments.of(0, new Integer[]{0, 1, 5, 6, 4, 7}),
-                Arguments.of(6, new Integer[]{6, 4}),
                 Arguments.of(3, new Integer[]{3, 5, 6, 4, 7}),
-                Arguments.of(2, new Integer[]{2}),
-                Arguments.of(1, new Integer[]{1, 0, 5, 6, 4, 7})
-        );
-    }
-
-    private static Stream<Arguments> testGraph2() {
-        return Stream.of(
-                Arguments.of(1, new Integer[]{1, 0, 2, 3, 5, 6, 7}),
-                Arguments.of(4, new Integer[]{4, 7}),
-                Arguments.of(3, new Integer[]{3, 1, 0, 2, 5, 6, 7})
+                Arguments.of(5, new Integer[]{5, 6, 4, 7}),
+                Arguments.of(7, new Integer[]{7, 6, 4})
         );
     }
 
     @ParameterizedTest(name = "{index}: DFS({0}) = {1}")
     @MethodSource
-    public void testGraph1(int in, Integer[] expected) {
-        assertArrayEquals(expected, graph1.DFS(in));
+    public void simpleCases(int in, Integer[] expected) {
+        assertArrayEquals(expected, graph.DFS(in));
     }
 
-    @ParameterizedTest(name = "{index}: DFS({0}) = {1}")
-    @MethodSource
-    public void testGraph2(int in, Integer[] expected) {
-        assertArrayEquals(expected, graph2.DFS(in));
+    @Test
+    @DisplayName("alone nodes")
+    void aloneNodes() {
+        assertAll(
+                () -> assertArrayEquals(graph.DFS(2), new Integer[]{2}),
+                () -> assertArrayEquals(graph.DFS(4), new Integer[]{4})
+        );
+    }
+
+    @Test
+    @DisplayName("pair of nodes")
+    void pairOfNodes() {
+        assertArrayEquals(graph.DFS(6), new Integer[]{6, 4});
+    }
+
+    @Test
+    @DisplayName("cycle of nodes")
+    void cycleOfNodes() {
+        assertAll(
+                () -> assertArrayEquals(graph.DFS(0), new Integer[]{0, 1, 5, 6, 4, 7}),
+                () -> assertArrayEquals(graph.DFS(1), new Integer[]{1, 0, 5, 6, 4, 7})
+        );
     }
 
     @Test
@@ -80,6 +73,6 @@ class GraphTest {
     @Test
     @DisplayName("node doesn't exist")
     void nodeNotExist() {
-        assertNull(new Graph(2).DFS(3));
+        assertNull(new Graph(3).DFS(3));
     }
 }

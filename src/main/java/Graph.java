@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class Graph {
-    private List<Integer>[] graph;
-    private Integer edgeCount;
+    private final List<Integer>[] graph;
+    private final Integer edgeCount;
 
     public Graph(int v) {
         edgeCount = v;
@@ -16,7 +16,7 @@ public class Graph {
     }
 
     Integer[] DFS(Integer node) {
-        if (graph.length == 0 || node > graph.length) return null;
+        if (graph == null || node >= graph.length) return null;
 
         ArrayList<Integer> result = new ArrayList<>();
         boolean[] visited = new boolean[edgeCount];
